@@ -35,6 +35,21 @@ app.post("/books", async (req, res) => {
     }
 });
 
+//Route to get all books from database
+app.get("/books", async (reqest, response) => {
+    try {
+        const books = await Book.find({});
+        return response.status(200).json({
+            count: books.length,
+            data: books
+        }
+        );
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+})
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 mongoose.connect(mongoDBURl).then(() => {
     console.log("App is connected to database");
@@ -44,24 +59,3 @@ mongoose.connect(mongoDBURl).then(() => {
 }).catch((error) => {
     console.log(error);
 })
-/*const client = new MongoClient(mongoDBURl, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
-
-async function run() {
-    try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
-        // Send a ping to confirm a successful connection
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
-}
-run().catch(console.dir);*/
