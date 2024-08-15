@@ -90,6 +90,24 @@ app.put('/books/:id', async (request, response) => {
     }
 });
 
+//Route for deleting book
+app.delete("/books/:id", async (reqest, response) => {
+    try {
+        const { id } = reqest.params;
+        const result = await Book.findByIdAndDelete(id);
+
+        if (!result) {
+            return response.status(404).json({ message: 'Book not found' });
+        }
+        return response.status(200).send({ message: 'Book deleted successfully' });
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+}
+);
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 mongoose.connect(mongoDBURl).then(() => {
     console.log('App is connected to database');
