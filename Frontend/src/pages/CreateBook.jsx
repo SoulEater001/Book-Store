@@ -16,7 +16,7 @@ const CreateBook = () => {
             author,
             publishYear,
         };
-        setLoading * (true);
+        setLoading(true);
         axios.post("http://localhost:5555/books", data)
             .then(() => {
                 setLoading(false);
