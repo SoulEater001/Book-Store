@@ -7,7 +7,7 @@
 
 ## Tech Stack
 
-- **Frontend**: Html, CSs, React, Tailwind, JavaScript, Vite
+- **Frontend**: Html, CSS, React, Tailwind, JavaScript, Vite
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 
