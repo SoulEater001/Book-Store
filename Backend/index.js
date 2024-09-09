@@ -1,9 +1,10 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import { PORT, mongoDBURl } from './config.js';
 import { Book } from './Models/bookModel.js';
 import BooksRoute from './Routes/BooksRoutes.js';
 import cors from 'cors';
+// import 'dotenv/config';
 
 const app = express();
 
@@ -30,6 +31,10 @@ app.get('/', (request, response) => {
 });
 
 app.use('/books', BooksRoute);
+
+// Accessing environment variables
+// const PORT = process.env.PORT || 3000;
+// const mongoDBURl = process.env.mongoDBURl || 'your-default-mongo-url';
 
 mongoose.connect(mongoDBURl).then(() => {
     console.log('App is connected to database');
